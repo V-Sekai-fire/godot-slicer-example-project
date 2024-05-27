@@ -23,11 +23,11 @@ func _process(_delta: float) -> void:
 			var plane_material: StandardMaterial3D = $Camera3D/Plane.get_surface_override_material(0)
 			var new_color = plane_material.albedo_color
 			new_color.a = .1
-			var fov_tween = get_tree().create_tween()
+			var fov_tween = create_tween()
 			fov_tween.set_ease(Tween.EASE_IN_OUT)
 			fov_tween.set_trans(Tween.TRANS_LINEAR)
 			fov_tween.tween_property($Camera3D, "fov", cut_mode_fov, .1)
-			var color_tween = get_tree().create_tween()
+			var color_tween = create_tween()
 			color_tween.set_ease(Tween.EASE_IN_OUT)
 			color_tween.set_trans(Tween.TRANS_LINEAR)
 			color_tween.tween_property(plane_material, "albedo_color", new_color, .1)
@@ -37,11 +37,11 @@ func _process(_delta: float) -> void:
 		var plane_material = $Camera3D/Plane.get_surface_override_material(0)		
 		var new_color = plane_material.albedo_color
 		new_color.a = 0
-		var fov_tween = get_tree().create_tween()
+		var fov_tween = create_tween()
 		fov_tween.set_ease(Tween.EASE_IN_OUT)
 		fov_tween.set_trans(Tween.TRANS_LINEAR)
 		fov_tween.tween_property($Camera3D, "fov", normal_fov, .1)
-		var color_tween = get_tree().create_tween()
+		var color_tween = create_tween()
 		color_tween.set_ease(Tween.EASE_IN_OUT)
 		color_tween.set_trans(Tween.TRANS_LINEAR)
 		color_tween.tween_property(plane_material, "albedo_color", new_color, .1)
