@@ -1,10 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bbvpercysi0kh"]
+[gd_scene load_steps=16 format=3 uid="uid://bbvpercysi0kh"]
 
 [ext_resource type="PackedScene" uid="uid://8sqsn3qprqr3" path="res://Player.tscn" id="1"]
-[ext_resource type="Material" path="res://scenes/main/materials/dark.material" id="2"]
-[ext_resource type="Material" path="res://scenes/main/materials/blue.material" id="3"]
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="4"]
-[ext_resource type="PackedScene" path="res://Sliceable.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://quhrchjf6l4b" path="res://Sliceable.tscn" id="5"]
 
 [sub_resource type="BoxMesh" id="1"]
 
@@ -45,15 +43,12 @@ material = SubResource("11")
 script = ExtResource("4")
 
 [node name="Area3D" type="Area3D" parent="."]
-space_override = 3
 linear_damp = 0.2
 angular_damp = 0.4
 
 [node name="Floor1" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(40, 0, 0, 0, -6.51683e-06, -1, 0, 40, -1.62921e-07, 0.0313206, 9.53674e-07, 0.00365067)
-use_in_baked_light = true
 mesh = SubResource("1")
-material/0 = ExtResource("2")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D/Floor1"]
 
@@ -62,9 +57,7 @@ shape = SubResource("2")
 
 [node name="Wall1" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, -1.74846e-06, -6, 0, 40, -2.62268e-07, -19.5, 3.5, 0)
-use_in_baked_light = true
 mesh = SubResource("3")
-material/0 = ExtResource("3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D/Wall1"]
 
@@ -73,9 +66,7 @@ shape = SubResource("4")
 
 [node name="Wall2" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, -1.74846e-06, -6, 0, 40, -2.62268e-07, 19.5, 3.5, 0)
-use_in_baked_light = true
 mesh = SubResource("3")
-material/0 = ExtResource("3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D/Wall2"]
 
@@ -84,9 +75,7 @@ shape = SubResource("4")
 
 [node name="Wall3" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(-4.37114e-08, 40, -2.62268e-07, 0, -1.74846e-06, -6, -1, -1.74846e-06, 1.14641e-14, 0, 3.5, 19.5)
-use_in_baked_light = true
 mesh = SubResource("3")
-material/0 = ExtResource("3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D/Wall3"]
 
@@ -95,9 +84,7 @@ shape = SubResource("4")
 
 [node name="Wall4" type="MeshInstance3D" parent="Area3D"]
 transform = Transform3D(-4.37114e-08, 40, -2.62268e-07, 0, -1.74846e-06, -6, -1, -1.74846e-06, 1.14641e-14, 0, 3.5, -19.5)
-use_in_baked_light = true
 mesh = SubResource("3")
-material/0 = ExtResource("3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Area3D/Wall4"]
 
@@ -114,44 +101,43 @@ shape = SubResource("5")
 transform = Transform3D(0.965926, 0.198266, 0.166365, -2.09447e-07, -0.642788, 0.766044, 0.258818, -0.739942, -0.620885, 2.17494, 9.39172, -2.14115)
 light_energy = 2.0
 shadow_enabled = true
-shadow_color = Color(0.6, 0.6, 0.6, 1)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 
-[node name="Sphere1" parent="." instance=ExtResource("5")]
+[node name="Sphere1" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -3)
-mode = 1
 cross_section_material = SubResource("6")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
-[node name="Sphere2" parent="." instance=ExtResource("5")]
+[node name="Sphere2" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(-1.62921e-07, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -1.62921e-07, 2.65431e-14, 0, 3, 0)
-mode = 1
 cross_section_material = SubResource("6")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
-[node name="Sphere3" parent="." instance=ExtResource("5")]
+[node name="Sphere3" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(-1.62921e-07, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -1.62921e-07, 2.65431e-14, 0, 3, -6)
-mode = 1
 cross_section_material = SubResource("6")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
-[node name="Sphere4" parent="." instance=ExtResource("5")]
+[node name="Sphere4" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(-1.62921e-07, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -1.62921e-07, 2.65431e-14, -4, 3, -3)
-mode = 1
 cross_section_material = SubResource("6")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
-[node name="Square1" parent="." instance=ExtResource("5")]
+[node name="Square1" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(-1.62921e-07, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -1.62921e-07, 2.65431e-14, 6.11868, 2.22782, -3)
-mode = 1
 cross_section_material = SubResource("7")
 mesh_override = SubResource("9")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
-[node name="Square2" parent="." instance=ExtResource("5")]
+[node name="Square2" parent="." node_paths=PackedStringArray("slicer_node", "mesh_instance_node") instance=ExtResource("5")]
 transform = Transform3D(-1.62921e-07, 1, -1.62921e-07, 0, -1.62921e-07, -1, -1, -1.62921e-07, 2.65431e-14, 6.11868, 2.22782, 6.51488)
-mode = 1
 cross_section_material = SubResource("10")
 mesh_override = SubResource("12")
-start_static = true
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")

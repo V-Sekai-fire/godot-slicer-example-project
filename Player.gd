@@ -1,6 +1,5 @@
 extends CharacterBody3D
 
-var velocity = Vector3()
 var move_axis = Vector2()
 var in_cut_mode = false
 
@@ -15,26 +14,37 @@ var SliceableScene = preload("res://Sliceable.tscn")
 
 func _ready():
 	$Camera3D.fov = self.normal_fov
-
+	
 func _process(_delta: float) -> void:
 	if Input.is_action_pressed("player_cut_mode"):
 		if not self.in_cut_mode:
 			self.in_cut_mode = true
 
-			var plane_material = $Camera3D/Plane.get_surface_override_material(0)
+			var plane_material: StandardMaterial3D = $Camera3D/Plane.get_surface_override_material(0)
 			var new_color = plane_material.albedo_color
 			new_color.a = .1
-			$Tween.interpolate_property($Camera3D, "fov", $Camera3D.fov, cut_mode_fov, .1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.interpolate_property(plane_material, "albedo_color", plane_material.albedo_color, new_color, .1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-			$Tween.start()
+			var fov_tween = get_tree().create_tween()
+			fov_tween.set_ease(Tween.EASE_IN_OUT)
+			fov_tween.set_trans(Tween.TRANS_LINEAR)
+			fov_tween.tween_property($Camera3D, "fov", cut_mode_fov, .1)
+			var color_tween = get_tree().create_tween()
+			color_tween.set_ease(Tween.EASE_IN_OUT)
+			color_tween.set_trans(Tween.TRANS_LINEAR)
+			color_tween.tween_property(plane_material, "albedo_color", new_color, .1)
+			
 	elif self.in_cut_mode:
 		self.in_cut_mode = false
 		var plane_material = $Camera3D/Plane.get_surface_override_material(0)		
 		var new_color = plane_material.albedo_color
 		new_color.a = 0
-		$Tween.interpolate_property($Camera3D, "fov", $Camera3D.fov, normal_fov, .1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.interpolate_property(plane_material, "albedo_color", plane_material.albedo_color, new_color, .1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
-		$Tween.start()
+		var fov_tween = get_tree().create_tween()
+		fov_tween.set_ease(Tween.EASE_IN_OUT)
+		fov_tween.set_trans(Tween.TRANS_LINEAR)
+		fov_tween.tween_property($Camera3D, "fov", normal_fov, .1)
+		var color_tween = get_tree().create_tween()
+		color_tween.set_ease(Tween.EASE_IN_OUT)
+		color_tween.set_trans(Tween.TRANS_LINEAR)
+		color_tween.tween_property(plane_material, "albedo_color", new_color, .1)
 
 	self.move_axis.x = Input.get_action_strength("player_forward") - Input.get_action_strength("player_backward")
 	self.move_axis.y = Input.get_action_strength("player_right") - Input.get_action_strength("player_left")

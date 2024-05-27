@@ -9,11 +9,12 @@ albedo_texture = ExtResource("1")
 [sub_resource type="SphereMesh" id="2"]
 material = SubResource("1")
 
-[node name="Sliceable" type="RigidBody3D"]
+[node name="Sliceable" type="RigidBody3D" node_paths=PackedStringArray("slicer_node", "mesh_instance_node")]
 script = ExtResource("2")
+slicer_node = NodePath("Slicer")
+mesh_instance_node = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("2")
-material/0 = null
 
 [node name="Slicer" type="Slicer" parent="."]
