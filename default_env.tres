@@ -1,15 +1,12 @@
-[gd_resource type="Environment" load_steps=2 format=2]
+[gd_resource type="Environment" load_steps=2 format=3 uid="uid://d0tn7nri25102"]
 
-[sub_resource type="ProceduralSky" id=1]
+[sub_resource type="Sky" id="1"]
 
 [resource]
 background_mode = 2
-background_sky = SubResource( 1 )
+sky = SubResource("1")
 tonemap_mode = 1
-ss_reflections_enabled = true
 ssao_enabled = true
-dof_blur_far_enabled = true
-dof_blur_far_distance = 13.0
 glow_enabled = true
 adjustment_enabled = true
 adjustment_contrast = 1.04
